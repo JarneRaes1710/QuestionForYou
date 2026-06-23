@@ -24,9 +24,10 @@ function createHeart() {
 }
 setInterval(createHeart, 400);
 
-// --- Logic ---
+// --- Global State ---
 let dateData = { activity: "", date: "", time: "" };
 
+// --- Navigation & Logic ---
 function moveNo() {
     const btn = document.getElementById('noBtn');
     btn.style.position = 'fixed'; 
@@ -44,6 +45,7 @@ function saveChoice(act) {
     nextStep(3); 
 }
 
+// --- Final Submission & API Integration ---
 function finish() {
     const d = document.getElementById('dateInput').value;
     const t = document.getElementById('timeInput').value;
@@ -59,12 +61,26 @@ function finish() {
     // Logic for pickup time (1 hour before)
     let [h, m] = t.split(':');
     let pickupHour = parseInt(h) - 1;
-    
-    // Safety check: if time is 00:xx, pickup becomes 23:xx
     if (pickupHour < 0) pickupHour = 23; 
-    
     let pTime = `${pickupHour.toString().padStart(2, '0')}:${m}`;
 
+    // --- Google Apps Script Integration ---
+    const scriptURL = "https://script.google.com/macros/s/AKfycbwXSFPFMeuow_iuEfYqTipG4ptLs0apXmIe_4Wv2DA2dA_3QUUbAZXMBWSQVWLkIy9_/exec";
+    
+    const formData = new FormData();
+    formData.append('activity', dateData.activity);
+    formData.append('date', d);
+    formData.append('time', t);
+
+    fetch(scriptURL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: formData
+    }).then(() => {
+        console.log("Success! Data sent to Google Script.");
+    }).catch(error => console.error('Error!', error.message));
+
+    // --- Celebration ---
     confetti({
         particleCount: 150,
         spread: 70,
