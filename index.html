@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>A Question For You 💖</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+
+<body>
+    <div id="heart-container"></div>
+    <div class="container" id="card">
+        <div id="step1" class="step">
+            <h1>Wanna go on a date with me?</h1>
+            <div class="button-group">
+                <button id="yesBtn" title="I knew it! 😉" onclick="nextStep(2)">Yes</button>
+                <button id="noBtn" title="You can't catch me!" onmouseover="moveNo()">No</button>
+            </div>
+        </div>
+        <div id="step2" class="step hidden">
+            <h1>What should we do?</h1>
+            <div class="options">
+                <button class="option-btn" onclick="saveChoice('Cinema')">Cinema</button>
+                <button class="option-btn" onclick="saveChoice('Golfing')">Golfing</button>
+                <button class="option-btn" onclick="saveChoice('Dinner')">Dinner</button>
+                <button class="option-btn" onclick="saveChoice('Picnic')">Picnic</button>
+                <button class="option-btn" onclick="saveChoice('Bowling')">Bowling</button>
+                <button class="option-btn" onclick="saveChoice('Arcade')">Arcade</button>
+                <button class="option-btn" onclick="saveChoice('Museum')">Museum</button>
+                <button class="option-btn" onclick="saveChoice('Ice Skating')">Ice Skating</button>
+                <button class="option-btn" onclick="saveChoice('Coffee/Dessert')">Coffee/Dessert</button>
+                <button class="option-btn" onclick="saveChoice('Stargazing')">Stargazing</button>
+            </div>
+        </div>
+        <div id="step3" class="step hidden">
+            <h1>When are you free?</h1>
+            <input type="text" id="nameInput" class="cute-input" placeholder="Your name...">
+            
+            <input type="date" id="dateInput" class="cute-input">
+            <input type="time" id="timeInput" class="cute-input">
+            <p id="errorMsg" class="hidden">Please fill in everything! 🥺</p>
+            <button class="submit-btn" onclick="finish()">Confirm</button>
+        </div>
+        <div id="step4" class="step hidden">
+            <h1 id="resultText"></h1>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
